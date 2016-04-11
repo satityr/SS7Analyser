@@ -1,18 +1,20 @@
 package com.inov.ss7analayser.beans;
 
 import java.awt.Color;
+import java.awt.event.*;
+import java.awt.Font;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapDumper;
 import org.jnetpcap.PcapIf;
 import org.jnetpcap.packet.JScanner;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,10 +23,14 @@ import org.jnetpcap.packet.PcapPacketHandler;
  */
 /**
  *
- * @author BilGwiN
+ * @author Satityr
  */
-public class JFrame1 extends javax.swing.JFrame {
+public class JFrame1 extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/**
 	 * Creates new form JFrame1
 	 */
@@ -49,210 +55,210 @@ public class JFrame1 extends javax.swing.JFrame {
 	// desc="Generated Code">//GEN-BEGIN:initComponents
 	private void initComponents() {
 
-		jButton_analyse_int = new javax.swing.JButton();
-		jButton_capture = new javax.swing.JButton();
-		jTextField1 = new javax.swing.JTextField();
-		jButton_list = new javax.swing.JButton();
-		jButton_laod = new javax.swing.JButton();
-		jButton_select = new javax.swing.JButton();
-		jButton_analyse = new javax.swing.JButton();
-		jTabbedPane1 = new javax.swing.JTabbedPane();
-		jScrollPane3 = new javax.swing.JScrollPane();
-		jList1 = new javax.swing.JList<>();
-		jScrollPane2 = new javax.swing.JScrollPane();
-		jTextArea1 = new javax.swing.JTextArea();
+		jButton_analyse_int = new JButton();
+		jButton_capture = new JButton();
+		jTextField1 = new JTextField();
+		jButton_list = new JButton();
+		jButton_laod = new JButton();
+		jButton_select = new JButton();
+		jButton_analyse = new JButton();
+		jTabbedPane1 = new JTabbedPane();
+		jScrollPane3 = new JScrollPane();
+		jList1 = new JList<>();
+		jScrollPane2 = new JScrollPane();
+		jTextArea1 = new JTextArea();
 
-		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setTitle("SS7 ANALYZER");
-		setBackground(new java.awt.Color(117, 125, 250));
+		setBackground(new Color(117, 125, 250));
 
-		jButton_analyse_int.setForeground(new java.awt.Color(40, 21, 233));
+		jButton_analyse_int.setForeground(new Color(40, 21, 233));
 		jButton_analyse_int.setText("Analyse");
 		jButton_analyse_int
-				.addActionListener(new java.awt.event.ActionListener() {
-					public void actionPerformed(java.awt.event.ActionEvent evt) {
+				.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent evt) {
 						jButton_analyse_intActionPerformed(evt);
 					}
 				});
 
-		jButton_capture.setForeground(new java.awt.Color(40, 21, 233));
+		jButton_capture.setForeground(new Color(40, 21, 233));
 		jButton_capture.setText("Capture");
-		jButton_capture.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		jButton_capture.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				jButton_captureActionPerformed(evt);
 			}
 		});
 
-		jTextField1.setForeground(new java.awt.Color(40, 21, 233));
+		jTextField1.setForeground(new Color(40, 21, 233));
 		jTextField1.setText("2");
 
-		jButton_list.setForeground(new java.awt.Color(40, 21, 233));
+		jButton_list.setForeground(new Color(40, 21, 233));
 		jButton_list.setText("List");
-		jButton_list.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		jButton_list.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				jButton_listActionPerformed(evt);
 			}
 		});
 
-		jButton_laod.setForeground(new java.awt.Color(253, 0, 0));
+		jButton_laod.setForeground(new Color(253, 0, 0));
 		jButton_laod.setText("Load ");
-		jButton_laod.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		jButton_laod.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				jButton_laodActionPerformed(evt);
 			}
 		});
 
-		jButton_select.setForeground(new java.awt.Color(40, 21, 233));
+		jButton_select.setForeground(new Color(40, 21, 233));
 		jButton_select.setText("Select");
-		jButton_select.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		jButton_select.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				jButton_selectActionPerformed(evt);
 			}
 		});
 
-		jButton_analyse.setForeground(new java.awt.Color(253, 0, 0));
+		jButton_analyse.setForeground(new Color(253, 0, 0));
 		jButton_analyse.setText("Analyse");
-		jButton_analyse.addActionListener(new java.awt.event.ActionListener() {
-			public void actionPerformed(java.awt.event.ActionEvent evt) {
+		jButton_analyse.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
 				jButton_analyseActionPerformed(evt);
 			}
 		});
 
-		jList1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+		jList1.setFont(new Font("Consolas", 0, 12)); // NOI18N
 		jScrollPane3.setViewportView(jList1);
 
 		jTabbedPane1.addTab("PACKET LIST", jScrollPane3);
 
 		jTextArea1.setEditable(false);
 		jTextArea1.setColumns(20);
-		jTextArea1.setFont(new java.awt.Font("Consolas", 0, 12)); // NOI18N
+		jTextArea1.setFont(new Font("Consolas", 0, 12)); // NOI18N
 		jTextArea1.setRows(5);
 		jScrollPane2.setViewportView(jTextArea1);
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(
+		GroupLayout layout = new GroupLayout(
 				getContentPane());
 		getContentPane().setLayout(layout);
 		layout.setHorizontalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
-						javax.swing.GroupLayout.Alignment.TRAILING,
+						GroupLayout.Alignment.TRAILING,
 						layout.createSequentialGroup()
 								.addContainerGap()
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING)
+												GroupLayout.Alignment.TRAILING)
 												.addComponent(jScrollPane2)
 												.addGroup(
-														javax.swing.GroupLayout.Alignment.LEADING,
+														GroupLayout.Alignment.LEADING,
 														layout.createSequentialGroup()
 																.addComponent(
 																		jButton_list,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.PREFERRED_SIZE,
 																		83,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																		GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
 																		jButton_select,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.PREFERRED_SIZE,
 																		82,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																		GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
 																		jTextField1,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.PREFERRED_SIZE,
 																		32,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																		GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
 																		jButton_capture,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.PREFERRED_SIZE,
 																		82,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																		GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
 																		jButton_analyse_int,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.PREFERRED_SIZE,
 																		92,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																		GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.RELATED,
 																		46,
 																		Short.MAX_VALUE)
 																.addComponent(
 																		jButton_laod,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.PREFERRED_SIZE,
 																		86,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																		GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(
 																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
 																		jButton_analyse,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.PREFERRED_SIZE,
 																		71,
-																		javax.swing.GroupLayout.PREFERRED_SIZE))
+																		GroupLayout.PREFERRED_SIZE))
 												.addComponent(
 														jTabbedPane1,
-														javax.swing.GroupLayout.Alignment.LEADING))
+														GroupLayout.Alignment.LEADING))
 								.addContainerGap()));
 
-		layout.linkSize(javax.swing.SwingConstants.HORIZONTAL,
+		layout.linkSize(SwingConstants.HORIZONTAL,
 				new java.awt.Component[] { jButton_analyse,
 						jButton_analyse_int, jButton_capture, jButton_laod,
 						jButton_list, jButton_select });
 
 		layout.setVerticalGroup(layout
-				.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+				.createParallelGroup(GroupLayout.Alignment.LEADING)
 				.addGroup(
-						javax.swing.GroupLayout.Alignment.TRAILING,
+						GroupLayout.Alignment.TRAILING,
 						layout.createSequentialGroup()
 								.addContainerGap()
 								.addComponent(jTabbedPane1,
-										javax.swing.GroupLayout.PREFERRED_SIZE,
+										GroupLayout.PREFERRED_SIZE,
 										134,
-										javax.swing.GroupLayout.PREFERRED_SIZE)
+										GroupLayout.PREFERRED_SIZE)
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addComponent(jScrollPane2,
-										javax.swing.GroupLayout.DEFAULT_SIZE,
+										GroupLayout.DEFAULT_SIZE,
 										346, Short.MAX_VALUE)
 								.addPreferredGap(
 										javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
 								.addGroup(
 										layout.createParallelGroup(
-												javax.swing.GroupLayout.Alignment.TRAILING)
+												GroupLayout.Alignment.TRAILING)
 												.addGroup(
 														layout.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
+																GroupLayout.Alignment.BASELINE)
 																.addComponent(
 																		jButton_laod)
 																.addComponent(
 																		jButton_analyse))
 												.addGroup(
 														layout.createParallelGroup(
-																javax.swing.GroupLayout.Alignment.BASELINE)
+																GroupLayout.Alignment.BASELINE)
 																.addComponent(
 																		jButton_list,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.PREFERRED_SIZE,
 																		23,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																		GroupLayout.PREFERRED_SIZE)
 																.addComponent(
 																		jButton_select)
 																.addComponent(
 																		jTextField1,
-																		javax.swing.GroupLayout.PREFERRED_SIZE,
-																		javax.swing.GroupLayout.DEFAULT_SIZE,
-																		javax.swing.GroupLayout.PREFERRED_SIZE)
+																		GroupLayout.PREFERRED_SIZE,
+																		GroupLayout.DEFAULT_SIZE,
+																		GroupLayout.PREFERRED_SIZE)
 																.addComponent(
 																		jButton_capture)
 																.addComponent(
 																		jButton_analyse_int)))
 								.addContainerGap()));
 
-		layout.linkSize(javax.swing.SwingConstants.VERTICAL,
+		layout.linkSize(SwingConstants.VERTICAL,
 				new java.awt.Component[] { jButton_analyse,
 						jButton_analyse_int, jButton_capture, jButton_laod,
 						jButton_list, jButton_select, jTextField1 });
@@ -262,7 +268,7 @@ public class JFrame1 extends javax.swing.JFrame {
 	}// </editor-fold>//GEN-END:initComponents
 
 	private void jButton_analyse_intActionPerformed(
-			java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_analyse_intActionPerformed
+			ActionEvent evt) {// GEN-FIRST:event_jButton_analyse_intActionPerformed
 
 		// Initialize the list with items
 		DefaultListModel model = new DefaultListModel();
@@ -319,7 +325,7 @@ public class JFrame1 extends javax.swing.JFrame {
 
 	}// GEN-LAST:event_jButton_analyse_intActionPerformed
 
-	private void jButton_captureActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_captureActionPerformed
+	private void jButton_captureActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton_captureActionPerformed
     
         JScanner.getThreadLocal().setFrameNumber(0); 
  
@@ -407,7 +413,7 @@ public class JFrame1 extends javax.swing.JFrame {
             
     }//GEN-LAST:event_jButton_captureActionPerformed
 
-	private void jButton_listActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_listActionPerformed
+	private void jButton_listActionPerformed(ActionEvent evt) {// GEN-FIRST:event_jButton_listActionPerformed
 
 		List<PcapIf> alldevs = new ArrayList<>(); // Will be filled with NICs
 		StringBuilder errbuf = new StringBuilder(); // For any error msgs
@@ -435,7 +441,7 @@ public class JFrame1 extends javax.swing.JFrame {
 		jTextField1.setVisible(true);
 	}// GEN-LAST:event_jButton_listActionPerformed
 
-	private void jButton_selectActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_selectActionPerformed
+	private void jButton_selectActionPerformed(ActionEvent evt) {// GEN-FIRST:event_jButton_selectActionPerformed
 
 		List<PcapIf> alldevs = new ArrayList<>(); // Will be filled with NICs
 		StringBuilder errbuf = new StringBuilder(); // For any error msgs
@@ -483,7 +489,7 @@ public class JFrame1 extends javax.swing.JFrame {
 		jButton_capture.setVisible(true);
 	}// GEN-LAST:event_jButton_selectActionPerformed
 
-	private void jButton_laodActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_laodActionPerformed
+	private void jButton_laodActionPerformed(ActionEvent evt) {// GEN-FIRST:event_jButton_laodActionPerformed
 		try {
 
 			jButton_select.setVisible(false);
@@ -503,7 +509,7 @@ public class JFrame1 extends javax.swing.JFrame {
 		}
 	}// GEN-LAST:event_jButton_laodActionPerformed
 
-	private void jButton_analyseActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jButton_analyseActionPerformed
+	private void jButton_analyseActionPerformed(ActionEvent evt) {// GEN-FIRST:event_jButton_analyseActionPerformed
 
 		// Initialize the list with items
 		DefaultListModel model = new DefaultListModel();
