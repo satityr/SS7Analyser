@@ -14,9 +14,9 @@ import com.inov.ss7analyser.beans.Device;
 			
 			
 			
-			System.out.println(device.isStatus());
-			
 			devicesToChooseFrom = device.getDevicesListName();
+			
+			if(device.isStatus()){
 			
 			for(StringBuilder deviceInfo : devicesToChooseFrom){
 				
@@ -32,7 +32,11 @@ import com.inov.ss7analyser.beans.Device;
 			System.out.println();
 			System.out.println("choosen device : ");
 			System.out.println(device.getChoosenDevice().getDescription());
+			}
 			
+			else {
+				System.out.println(devicesToChooseFrom[0]);
+			}
 		}
 		
 		

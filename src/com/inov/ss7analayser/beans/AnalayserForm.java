@@ -499,7 +499,7 @@ public class AnalayserForm extends JFrame {
 	public void analyseActionPerformed(ActionEvent evt) {// GEN-FIRST:event_jButton_analyseActionPerformed
 
 		// Initialize the list with items
-		DefaultListModel model = new DefaultListModel();
+		DefaultListModel<String> model = new DefaultListModel<String>();
 		final StringBuilder errbuf = new StringBuilder(); // For any error msgs
 
 		final String file = outputText.getText();
@@ -541,7 +541,6 @@ public class AnalayserForm extends JFrame {
 
 		} finally {
 			pcap.close();
-			int i = 0;
 			analayseLoadedFile.setEnabled(false);
 		}
 	}// GEN-LAST:event_jButton_analyseActionPerformed
