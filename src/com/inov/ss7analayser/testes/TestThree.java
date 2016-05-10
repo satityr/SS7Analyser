@@ -73,5 +73,6 @@ class EventBusSenderVerticle extends AbstractVerticle {
     		vertx.eventBus().send   ("anAddress", "message 1");
     	}
         System.out.println("sender done!");
+        
     }
 }

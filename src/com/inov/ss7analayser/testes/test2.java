@@ -1,5 +1,8 @@
 package com.inov.ss7analayser.testes;
 
+import io.vertx.core.DeploymentOptions;
+import io.vertx.core.Vertx;
+
 import java.util.Queue;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -8,6 +11,8 @@ import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
 
 import com.inov.ss7analyser.beans.Device;
+import com.inov.ss7analyser.beans.OnlineCapture;
+import com.inov.ss7analyser.beans.PacketAnalyser;
 import com.inov.ss7analyser.beans.SS7Packet;
 
 
@@ -16,13 +21,16 @@ import com.inov.ss7analyser.beans.SS7Packet;
 		
 		public static void main(String[] args){
 			
+			Vertx vertx = Vertx.vertx();
 			
-			Device device = new Device();
+			
+			
+			 
+			
+			/*
+			 * 
+			 * Device device = new Device();
 			StringBuilder[] devicesToChooseFrom ;
-			int snaplen = 64 * 1024;           // Capture all packets, no trucation  
-	        int flags = Pcap.MODE_PROMISCUOUS; // capture all packets  
-	        int timeout = 10 * 1000;           // 10 seconds in millis  
-	        StringBuilder errbuf = new StringBuilder();
 			
 			devicesToChooseFrom = device.getDevicesListName();
 			
@@ -46,11 +54,14 @@ import com.inov.ss7analyser.beans.SS7Packet;
 			
 			else {
 				System.out.println(devicesToChooseFrom[0]);
-			}
-		
+			}*/
+			
+			vertx.deployVerticle(new OnlineCapture());
+			
+			vertx.deployVerticle(new PacketAnalyser());
 			
 		
-        Pcap pcap = Pcap.openLive((device.getChoosenDevice()).getName(), snaplen, flags, timeout, errbuf);  
+        /*Pcap pcap = Pcap.openLive((device.getChoosenDevice()).getName(), snaplen, flags, timeout, errbuf);  
   
         if (pcap == null) {  
             System.err.printf("Error while opening device for capture: ");  
@@ -77,7 +88,7 @@ import com.inov.ss7analyser.beans.SS7Packet;
         	System.out.println(pp.toString());
         }
 
-        pcap.close();
+        pcap.close();*/
     }  
 		
 }
