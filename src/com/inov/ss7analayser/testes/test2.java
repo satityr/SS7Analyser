@@ -1,21 +1,15 @@
 package com.inov.ss7analayser.testes;
 
-import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
-
-import java.util.Queue;
-import java.util.concurrent.ArrayBlockingQueue;
-
-import org.jnetpcap.Pcap;
-import org.jnetpcap.packet.PcapPacket;
-import org.jnetpcap.packet.PcapPacketHandler;
 
 import com.inov.ss7analyser.beans.Device;
 import com.inov.ss7analyser.beans.OnlineCapture;
 import com.inov.ss7analyser.beans.PacketAnalyser;
-import com.inov.ss7analyser.beans.SS7Packet;
 
-
+/**
+ * 
+ * @author Abderrahim OUBIDAR
+ */
 	
 	public class test2 {
 		
@@ -27,9 +21,7 @@ import com.inov.ss7analyser.beans.SS7Packet;
 			
 			 
 			
-			/*
-			 * 
-			 * Device device = new Device();
+			Device device = new Device();
 			StringBuilder[] devicesToChooseFrom ;
 			
 			devicesToChooseFrom = device.getDevicesListName();
@@ -54,9 +46,9 @@ import com.inov.ss7analyser.beans.SS7Packet;
 			
 			else {
 				System.out.println(devicesToChooseFrom[0]);
-			}*/
+			}
 			
-			vertx.deployVerticle(new OnlineCapture());
+			vertx.deployVerticle(new OnlineCapture(device));
 			
 			vertx.deployVerticle(new PacketAnalyser());
 			

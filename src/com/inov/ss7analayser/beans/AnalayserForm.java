@@ -23,9 +23,9 @@ import org.jnetpcap.packet.PcapPacketHandler;
 
 
 /**
-*
-* @author Satityr
-*/
+ * 
+ * @author Abderrahim OUBIDAR
+ */
 
 public class AnalayserForm extends JFrame {
 	

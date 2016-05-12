@@ -3,6 +3,11 @@ package com.inov.ss7analyser.beans;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.packet.PcapPacket;
 
+/**
+ * 
+ * @author Abderrahim OUBIDAR
+ */
+
 public class SS7Packet {
 
 		private static Pcap openPacketSource ;

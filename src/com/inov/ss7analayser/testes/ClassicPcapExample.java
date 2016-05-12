@@ -8,6 +8,7 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapIf;
+import org.jnetpcap.nio.JBuffer;
 import org.jnetpcap.packet.PcapPacket;
 import org.jnetpcap.packet.PcapPacketHandler;
 
@@ -124,11 +125,20 @@ public class ClassicPcapExample {
 
         PcapPacketHandler<Queue<SS7Packet>> handler = new PcapPacketHandler<Queue<SS7Packet>>() {
           public void nextPacket(PcapPacket packet, Queue<SS7Packet> queue) {
+        	 
+//        	  JBuffer jbuf = new JBuffer(packet.getTotalSize());
+//        	  packet.transferStateAndDataTo(jbuf);
+//        	  PcapPacket p1 = new PcapPacket(jbuf);
         	  
-        	SS7Packet permanentPacket = new SS7Packet(packet);
-            System.out.println("a packet copied!");
-            queue.offer(permanentPacket);
-            System.out.println("a packet offered!");
+        	  
+        	  byte[] bb = new byte[packet.getTotalSize()];
+        	  packet.transferStateAndDataTo(bb);
+        	  PcapPacket p2 = new PcapPacket(bb);
+        	  
+        	  SS7Packet permanentPacket = new SS7Packet(p2);
+        	  System.out.println("a packet copied!");
+        	  queue.offer(permanentPacket);
+        	  System.out.println("a packet offered!");
           }
         };
 
@@ -136,10 +146,10 @@ public class ClassicPcapExample {
 
         pcap.loop(5, handler, queue);
 
-        System.out.println("we have " + queue.size() + " packets in our queue");
-        for ( SS7Packet pp : queue ){
-        	System.out.println(pp.toString());
-        }
+//        System.out.println("we have " + queue.size() + " packets in our queue");
+//        for ( SS7Packet pp : queue ){
+//        	System.out.println(pp.toString());
+//        }
 
         pcap.close();
     }  

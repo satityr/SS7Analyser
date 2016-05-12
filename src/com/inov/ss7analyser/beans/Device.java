@@ -7,9 +7,9 @@ import org.jnetpcap.PcapIf;
 
 
 /**
-*
-* @author OUBIDAR Abderrahim
-*/
+ * 
+ * @author Abderrahim OUBIDAR
+ */
 public class Device {
 
 	private List<PcapIf> devicesList = new ArrayList<>(); // Will be filled with

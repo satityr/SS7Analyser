@@ -18,6 +18,10 @@ import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
 import io.vertx.core.json.JsonObject;
 
+/**
+ * 
+ * @author Abderrahim OUBIDAR
+ */
 
 public class OnlineCapture extends AbstractVerticle {
 	
@@ -29,56 +33,59 @@ public class OnlineCapture extends AbstractVerticle {
 		
 		JsonObject jobj = new JsonObject() ;
 		
-		StringBuilder[] devicesToChooseFrom ;
 		
+		
+		PcapPacket packetToSend ;
 	
 		
 	
 		
 		
 		
+		public OnlineCapture(Device device) {
+			super();
+			this.device = device;
+		}
+
 		PcapPacketHandler<JsonObject> handler = new PcapPacketHandler<JsonObject>() {
 	          public void nextPacket(PcapPacket packet, JsonObject obj) {
 	        	  
 	        	obj.put("packet", packet.toString());
+	        	
 	        	vertx.eventBus().send ("com.inov.analyser", obj );
 	        	
 	          }
 	        };
+	        
+	    PcapPacketHandler<PcapPacket> packetHandler = new PcapPacketHandler<PcapPacket>(){
+
+			@Override
+			public void nextPacket(PcapPacket packet, PcapPacket PermanentPacket) {
+				
+				PermanentPacket = new PcapPacket(packet);
+				
+
+				vertx.eventBus().send ("com.inov.analyser", PermanentPacket );
+				
+			}
+	    	
+	    };
+	    
 		
 		public void start(Future<Void> startFuture) throws Exception {
 			
 			
 
-			devicesToChooseFrom = device.getDevicesListName();
 			
-			
-			if(device.isStatus()){
-			
-			for(StringBuilder deviceInfo : devicesToChooseFrom){
-				
-				System.out.print(deviceInfo.toString());
-				
-			}
-			
-			// here the user should choose an interface (device) to capture from a list
-			// but for testing we will work with the wi-fi by default
-			
-			device.setChoosenDevice(devicesToChooseFrom[3]);
-			
-			System.out.println();
-			System.out.println("choosen device : ");
-			System.out.println(device.getChoosenDevice().getDescription());
-			}
-			
-			else {
-				System.out.println(devicesToChooseFrom[0]);
-			}
     	
 			openedDevice = device.openDevice(device.getChoosenDevice());
+			vertx.eventBus().registerDefaultCodec(PcapPacket.class, new PacketCodec());
 			
 			if(device.isStatus())
-			openedDevice.loop(5, handler, jobj);
+			vertx.executeBlocking(future -> {
+				openedDevice.loop(5, packetHandler, packetToSend);
+				future.complete();
+			}, false, result -> {});
 		}
 		
 		public void stop(Future<Void> startFuture) throws Exception {
