@@ -1,7 +1,10 @@
 package com.inov.ss7analyser.beans;
 
-import org.jnetpcap.packet.PcapPacket;
-import org.jnetpcap.protocol.network.Ip4;
+/**
+ * our reciever verticle
+ * 
+ */
+
 import org.jnetpcap.protocol.sigtran.Sctp;
 import org.jnetpcap.protocol.sigtran.SctpData;
 
@@ -10,7 +13,6 @@ import com.inov.ss7analyser.protocoles.M3uaData;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
-import io.vertx.core.json.JsonObject;
 
 /**
  * 

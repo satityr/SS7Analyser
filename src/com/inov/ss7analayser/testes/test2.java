@@ -1,12 +1,15 @@
 package com.inov.ss7analayser.testes;
 
 import org.jnetpcap.Pcap;
+import org.jnetpcap.packet.PcapPacket;
 
 import io.vertx.core.Vertx;
 
 import com.inov.ss7analyser.beans.Device;
 import com.inov.ss7analyser.beans.OnlineCapture;
 import com.inov.ss7analyser.beans.PacketAnalyser;
+import com.inov.ss7analyser.beans.PacketCodec;
+import com.inov.ss7analyser.beans.SS7Packet;
 import com.inov.ss7analyser.protocoles.RegisterNewProtocole;
 
 /**
@@ -19,7 +22,10 @@ public class test2 {
 	public static void main(String[] args) {
 
 		Vertx vertx = Vertx.vertx();
+		
+		// Must register our protocoles before opening the device for capture
 		new RegisterNewProtocole().RegisterProtocoles();
+		
 		Device device = new Device();
 		StringBuilder[] devicesToChooseFrom;
 
@@ -44,17 +50,25 @@ public class test2 {
 			System.out.println(device.getChoosenDevice().getDescription());
 
 			Pcap opening = device.openDevice(device.getChoosenDevice());
+			
 
 			if (device.isStatus()) {
-
+			
+				// register the default codec for our eventBus
+				vertx.eventBus().registerDefaultCodec(PcapPacket.class, new PacketCodec());
+				
+				//deploy our sender
 				vertx.deployVerticle(new OnlineCapture(opening));
-
+				
+				// deploy our reciever
 				vertx.deployVerticle(new PacketAnalyser());
 			}
 
 		}
 
 		else {
+			
+			// devicesToChooseFrom[0] contains an error message
 			System.out.println(devicesToChooseFrom[0]);
 		}
 

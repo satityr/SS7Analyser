@@ -3,9 +3,11 @@ package com.inov.ss7analayser.testes;
 import java.util.Random;
 
 import org.jnetpcap.Pcap;
+import org.jnetpcap.packet.PcapPacket;
 
 import com.inov.ss7analyser.beans.OnlineCapture;
 import com.inov.ss7analyser.beans.PacketAnalyser;
+import com.inov.ss7analyser.beans.PacketCodec;
 import com.inov.ss7analyser.protocoles.RegisterNewProtocole;
 
 import io.vertx.core.*;
@@ -20,6 +22,7 @@ public class TestThree {
 	public static void main(String[] args) {
 
 		Vertx vertx = Vertx.vertx();
+		new RegisterNewProtocole().RegisterProtocoles();
 		
 		String[] files = { "D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\BeniMellal2.pcap",
 				"D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\CasaNU2.pcap",
@@ -39,7 +42,7 @@ public class TestThree {
 		StringBuilder errorMsg = new StringBuilder();
 		int fileNumber = rand.nextInt(12);
 		
-		new RegisterNewProtocole().RegisterProtocoles();
+		
 		
 		
 		System.out.println("opening : " + files[fileNumber] + "... DONE!");
@@ -48,6 +51,8 @@ public class TestThree {
 		
 		
 		if( openFile != null ){
+			// register the default codec for our eventBus
+			vertx.eventBus().registerDefaultCodec(PcapPacket.class, new PacketCodec());
 			
 			vertx.deployVerticle(new OnlineCapture(openFile));
 
