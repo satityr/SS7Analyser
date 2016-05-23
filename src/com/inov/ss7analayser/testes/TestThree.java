@@ -1,5 +1,13 @@
 package com.inov.ss7analayser.testes;
 
+import java.util.Random;
+
+import org.jnetpcap.Pcap;
+
+import com.inov.ss7analyser.beans.OnlineCapture;
+import com.inov.ss7analyser.beans.PacketAnalyser;
+import com.inov.ss7analyser.protocoles.RegisterNewProtocole;
+
 import io.vertx.core.*;
 
 /**
@@ -12,72 +20,43 @@ public class TestThree {
 	public static void main(String[] args) {
 
 		Vertx vertx = Vertx.vertx();
-
-		vertx.deployVerticle(new EventBusReceiverVerticle("R1"));
-		vertx.deployVerticle(new EventBusReceiverVerticle("R2"));
-		vertx.deployVerticle(new EventBusReceiverVerticle("R3"));
-		vertx.deployVerticle(new EventBusReceiverVerticle("R4"));
-
-		try {
+		
+		String[] files = { "D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\BeniMellal2.pcap",
+				"D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\CasaNU2.pcap",
+				"D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\msgh2.pcap",
+				"D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\pcapAAQ.pcap",
+				"D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\pcapAINZ.pcap",
+				"D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\pcapALGD2.pcap",
+				"D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\pcapELJ.pcap",
+				"D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\pcapLallarakia.pcap",
+				"D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\pcapMechSidiGH.pcap",
+				"D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\pcapMgueliz2.pcap",
+				"D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\pcapSETTAT.pcap",
+				"D:\\Study\\Stages\\INE3\\INOV\\pcapWireshark\\pcapSOK.pcap"
+		};
+		
+		Random rand = new Random();
+		StringBuilder errorMsg = new StringBuilder();
+		int fileNumber = rand.nextInt(12);
+		
+		new RegisterNewProtocole().RegisterProtocoles();
+		
+		
+		System.out.println("opening : " + files[fileNumber] + "... DONE!");
+		
+		Pcap openFile = Pcap.openOffline(files[fileNumber], errorMsg);
+		
+		
+		if( openFile != null ){
 			
-			for(int i = 0 ; i < 3 ;  i++){
-				System.out.println((i+1));
-				Thread.sleep(1000);
-			}
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			vertx.deployVerticle(new OnlineCapture(openFile));
+
+			vertx.deployVerticle(new PacketAnalyser());
+			
 		}
-		vertx.deployVerticle(new EventBusSenderVerticle());
+		else {
+			System.out.println("can't open file : " + files[fileNumber] + "/n => " + errorMsg.toString());
+		}
+		
 	}
-
-}
-
-
-
-class EventBusReceiverVerticle extends AbstractVerticle {
-
-    private String name = null;
-
-    public EventBusReceiverVerticle(String name) {
-        this.name = name;
-    }
-
-    public void start(Future<Void> startFuture) {
-    	
-    	System.out.println(this.name + " started");
-        vertx.eventBus().consumer("anAddress", message -> {
-            System.out.println(this.name + 
-                " received message: " +
-                message.body());
-            try {
-				Thread.sleep(4000);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-            System.out.println(this.name + " is tired");
-        });
-    }
-}
-
-class EventBusSenderVerticle extends AbstractVerticle {
-
-    public void start(Future<Void> startFuture) {
-    	
-    	System.out.println("sender started");
-    //  vertx.eventBus().publish("anAddress", "message 2");
-    	for(int i = 0; i < 7 ; i++ ){
-    		try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    		System.out.println("sender is sending!");
-    		vertx.eventBus().send   ("anAddress", "message 1");
-    	}
-        System.out.println("sender done!");
-        
-    }
 }

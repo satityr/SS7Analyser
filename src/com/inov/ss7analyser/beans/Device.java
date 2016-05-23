@@ -2,9 +2,9 @@ package com.inov.ss7analyser.beans;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.jnetpcap.Pcap;
 import org.jnetpcap.PcapIf;
-
 
 /**
  * 
@@ -14,9 +14,9 @@ public class Device {
 
 	private List<PcapIf> devicesList = new ArrayList<>(); // Will be filled with
 															// NICs
-	private StringBuilder[] devicesListName; 	// Devices names and description
+	private StringBuilder[] devicesListName; // Devices names and description
 	private PcapIf choosenDevice;
-	private boolean status; 					// true means OK, false means errors
+	private boolean status; // true means OK, false means errors
 
 	public Device() {
 		super();
@@ -27,23 +27,23 @@ public class Device {
 		return devicesList;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void setDevicesList() {
 		StringBuilder errbuf = new StringBuilder();
 
 		int r = Pcap.findAllDevs(devicesList, errbuf);
 
 		if (r == Pcap.NOT_OK || devicesList.isEmpty()) {
-			devicesListName = new StringBuilder[] { new StringBuilder() } ;
-			devicesListName[0].append(
-					"Can't read list of devices, error is " + errbuf.toString());
+			devicesListName = new StringBuilder[] { new StringBuilder() };
+			devicesListName[0].append("Can't read list of devices, error is "
+					+ errbuf.toString());
 			this.setStatus(false);
 		}
 
 		else {
-			
+
 			devicesListName = new StringBuilder[devicesList.size() + 1];
-			
-			
+
 			devicesListName[0] = new StringBuilder("Network devices found: \n");
 
 			int i = 1;
@@ -91,21 +91,21 @@ public class Device {
 		this.status = status;
 	}
 
-	public Pcap openDevice(PcapIf givenDevice){
-		
-		int snaplen = 64 * 1024; 					// Capture all packets, no trucation
-		int flags = Pcap.MODE_PROMISCUOUS;			// capture all packets
-		int timeout = 10 * 1000; 					// 10 seconds in millis
+	public Pcap openDevice(PcapIf givenDevice) {
+
+		int snaplen = 64 * 1024; // Capture all packets, no trucation
+		int flags = Pcap.MODE_PROMISCUOUS; // capture all packets
+		int timeout = 10 * 1000; // 10 seconds in millis
 		StringBuilder errbuf = new StringBuilder();
-		
-		Pcap pcap = Pcap.openLive(givenDevice.getName(), snaplen, flags, timeout,errbuf);
+
+		Pcap pcap = Pcap.openLive(givenDevice.getName(), snaplen, flags,
+				timeout, errbuf);
 
 		if (pcap == null) {
 			this.setStatus(false);
 		}
-		
-		return pcap ;
+
+		return pcap;
 	}
-	
-	
+
 }
