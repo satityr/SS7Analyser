@@ -3,6 +3,8 @@ package com.inov.ss7analyser.beans;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.packet.PcapPacket;
 
+import com.inov.ss7analayser.testes.PcapPacketModified;
+
 /**
  * 
  * @author Abderrahim OUBIDAR
@@ -14,6 +16,7 @@ public class SS7Packet {
 		private PcapPacket ss7Packet ;
 		private int DPC;
 		private int OPC;
+
 		
 		
 		
@@ -29,6 +32,8 @@ public class SS7Packet {
 			super();
 			this.ss7Packet = ss7Packet;
 		}
+		
+
 
 		public SS7Packet(PcapPacket ss7Packet, Pcap openPacketSource) {
 			super();

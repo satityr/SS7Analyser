@@ -18,7 +18,7 @@ public class PacketCodec implements MessageCodec<PcapPacket, SS7Packet> {
 		
 		int lengthOfPacket = bufferFromWire.getInt(position);
 		byte[] byteArrayRecievedFromWire = new byte[lengthOfPacket];
-		byteArrayRecievedFromWire = bufferFromWire.getBytes(position + 4, lengthOfPacket + 4);
+		byteArrayRecievedFromWire = bufferFromWire.getBytes(position + 4, lengthOfPacket + position + 4);
 		
 		return new SS7Packet(new PcapPacket(byteArrayRecievedFromWire));
 	}

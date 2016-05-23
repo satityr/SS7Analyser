@@ -7,6 +7,7 @@ import io.vertx.core.Vertx;
 import com.inov.ss7analyser.beans.Device;
 import com.inov.ss7analyser.beans.OnlineCapture;
 import com.inov.ss7analyser.beans.PacketAnalyser;
+import com.inov.ss7analyser.protocoles.RegisterNewProtocole;
 
 /**
  * 
@@ -18,7 +19,7 @@ public class test2 {
 	public static void main(String[] args) {
 
 		Vertx vertx = Vertx.vertx();
-
+		new RegisterNewProtocole().RegisterProtocoles();
 		Device device = new Device();
 		StringBuilder[] devicesToChooseFrom;
 
