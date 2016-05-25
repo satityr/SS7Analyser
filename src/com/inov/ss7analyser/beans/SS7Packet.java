@@ -62,6 +62,9 @@ public class SS7Packet {
 		return OPC;
 	}
 
+	public int getSI() {
+		return SI;
+	}
 	public String getSIdescription() {
 		switch (this.SI) {
 		case 3:

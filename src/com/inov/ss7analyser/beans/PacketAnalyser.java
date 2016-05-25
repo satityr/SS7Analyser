@@ -46,7 +46,8 @@ public class PacketAnalyser extends AbstractVerticle {
              			if( SS7PacketRecieved.getSs7Packet().hasHeader(m3uaData) ){
                  			System.out.println("has M3ua data");
                  			System.out.println(" Opc : " + m3uaData.opc() +"\n Dpc : " + m3uaData.dpc());
-                 			
+                 			SS7PacketRecieved.extractRoutingLabel();
+                 			System.out.println(SS7PacketRecieved.getDPC());
                  		}
              		}
          		}
