@@ -17,7 +17,7 @@ import com.inov.ss7analyser.protocoles.RegisterNewProtocole;
  * @author Abderrahim OUBIDAR
  */
 
-public class test2 {
+public class NewTest {
 
 	public static void main(String[] args) {
 

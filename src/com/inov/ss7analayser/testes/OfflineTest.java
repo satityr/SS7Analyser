@@ -17,7 +17,7 @@ import io.vertx.core.*;
  * @author Abderrahim OUBIDAR
  */
 
-public class TestThree {
+public class OfflineTest {
 
 	public static void main(String[] args) {
 

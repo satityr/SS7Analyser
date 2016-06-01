@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jnetpcap"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/vert.x.3"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/json"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JnetPcap"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/vertx"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JnetPcap1.4"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/jnetpcap"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/vert.x.3"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/json"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/JnetPcap"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/vertx"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/JnetPcap1.4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
