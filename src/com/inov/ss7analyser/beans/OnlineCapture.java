@@ -58,14 +58,19 @@ public class OnlineCapture extends AbstractVerticle {
 		 * or future.failed as a result, in our case we don't care about faillure so the result part
 		 * is empry
 		 */
-
 		
-		vertx.executeBlocking(future -> {
-				JScanner.getThreadLocal().setFrameNumber(1);
-				openedDevice.loop(5, packetHandler, packetToSend);
-				future.complete();
-			}, false, result -> {
-			});
+//		vertx.executeBlocking(future -> {
+//				JScanner.getThreadLocal().setFrameNumber(1);
+//				openedDevice.loop(5, packetHandler, packetToSend);
+//				future.complete();
+//			}, false, result -> {
+//			});
+		
+		/* 
+		 * other way to do so is to make the current verticle a "worker verticle"
+		 */
+		JScanner.getThreadLocal().setFrameNumber(1);
+		openedDevice.loop(5, packetHandler, packetToSend);
 	}
 
 	public void stop(Future<Void> startFuture) throws Exception {

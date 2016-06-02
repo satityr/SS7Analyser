@@ -3,6 +3,7 @@ package com.inov.ss7analayser.testes;
 import org.jnetpcap.Pcap;
 import org.jnetpcap.packet.PcapPacket;
 
+import io.vertx.core.DeploymentOptions;
 import io.vertx.core.Vertx;
 
 import com.inov.ss7analyser.beans.Device;
@@ -43,7 +44,7 @@ public class NewTest {
 			// a list
 			// but for testing we will work with the wi-fi by default
 
-			device.setChoosenDevice(devicesToChooseFrom[3]);
+			device.setChoosenDevice(devicesToChooseFrom[2]);
 
 			System.out.println();
 			System.out.println("choosen device : ");
@@ -57,10 +58,14 @@ public class NewTest {
 				// register the default codec for our eventBus
 				vertx.eventBus().registerDefaultCodec(PcapPacket.class, new PacketCodec());
 				
+				// deployment options
+				DeploymentOptions options = new DeploymentOptions().setWorker(true);
+				options.setHa(true);
 				//deploy our sender
-				vertx.deployVerticle(new OnlineCapture(opening));
+				vertx.deployVerticle(new OnlineCapture(opening), options);
 				
 				// deploy our reciever
+				vertx.deployVerticle(new PacketAnalyser());
 				vertx.deployVerticle(new PacketAnalyser());
 			}
 
