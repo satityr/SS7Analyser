@@ -70,7 +70,7 @@ public class OnlineCapture extends AbstractVerticle {
 		 * other way to do so is to make the current verticle a "worker verticle"
 		 */
 		JScanner.getThreadLocal().setFrameNumber(1);
-		openedDevice.loop(5, packetHandler, packetToSend);
+		openedDevice.loop(Pcap.LOOP_INFINITE, packetHandler, packetToSend);
 	}
 
 	public void stop(Future<Void> startFuture) throws Exception {

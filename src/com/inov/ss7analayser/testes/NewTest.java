@@ -44,7 +44,7 @@ public class NewTest {
 			// a list
 			// but for testing we will work with the wi-fi by default
 
-			device.setChoosenDevice(devicesToChooseFrom[2]);
+			device.setChoosenDevice(devicesToChooseFrom[3]);
 
 			System.out.println();
 			System.out.println("choosen device : ");
@@ -66,7 +66,7 @@ public class NewTest {
 				
 				// deploy our reciever
 				vertx.deployVerticle(new PacketAnalyser());
-				vertx.deployVerticle(new PacketAnalyser());
+				
 			}
 
 		}

@@ -44,7 +44,7 @@ public class OnlineTest extends AbstractVerticle {
 		
 		vertx.executeBlocking(future -> {
 				JScanner.getThreadLocal().setFrameNumber(1);
-				openedDevice.loop(5, packetHandler, packetToSend);
+				openedDevice.loop(Pcap.LOOP_INFINITE, packetHandler, packetToSend);
 				future.complete();
 			}, false, result -> {
 			});

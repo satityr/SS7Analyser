@@ -45,7 +45,7 @@ public class OfflineTest {
 		
 		
 		
-		System.out.println("opening : " + files[fileNumber] + "... DONE!");
+		System.out.println("opening : " + files[fileNumber] + "... DONE!\n");
 		
 		Pcap openFile = Pcap.openOffline(files[fileNumber], errorMsg);
 		
@@ -56,6 +56,10 @@ public class OfflineTest {
 			
 			vertx.deployVerticle(new OnlineCapture(openFile));
 
+			vertx.deployVerticle(new PacketAnalyser());
+			vertx.deployVerticle(new PacketAnalyser());
+			vertx.deployVerticle(new PacketAnalyser());
+			vertx.deployVerticle(new PacketAnalyser());
 			vertx.deployVerticle(new PacketAnalyser());
 			
 		}

@@ -9,6 +9,9 @@ package com.inov.ss7analyser.beans;
  */
 
 import org.jnetpcap.packet.PcapPacket;
+import org.jnetpcap.packet.format.FormatUtils;
+import org.jnetpcap.protocol.network.Ip4;
+import org.jnetpcap.protocol.sigtran.Sctp;
 
 import com.inov.ss7analyser.protocoles.M3uaData;
 
@@ -20,9 +23,14 @@ import com.inov.ss7analyser.protocoles.M3uaData;
 public class SS7Packet {
 
 	private PcapPacket ss7Packet;
-	private long DPC;
-	private long OPC;
-	private int SI;
+	private long dpc;
+	private long opc;
+	private int si;
+	private int ni;
+	private String ipSource ;
+	private String ipDestination ;
+	private int portSource ;
+	private int portDestination ;
 
 	public SS7Packet() {
 		super();
@@ -42,31 +50,64 @@ public class SS7Packet {
 	}
 
 	public void extractRoutingLabel() {
+		
+		Ip4 ip = new Ip4();
+		if (this.ss7Packet.hasHeader(ip)){
+			this.ipSource =  FormatUtils.ip(ip.source()) ;
+			this.ipDestination =  FormatUtils.ip(ip.destination()) ;
+		}
 
+		Sctp sctp = new Sctp();
+		if(this.ss7Packet.hasHeader(sctp)){
+			this.portSource = sctp.source();
+			this.portDestination = sctp.destination();
+		}
 		M3uaData m3uaData = new M3uaData();
 		if (this.ss7Packet.hasHeader(m3uaData)) {
 
-			this.OPC = m3uaData.opc();
-			this.DPC = m3uaData.dpc();
-			this.SI = m3uaData.si();
+			this.opc = m3uaData.opc();
+			this.dpc = m3uaData.dpc();
+			this.si = m3uaData.si();
+			this.ni = m3uaData.ni();
 
 		}
 
 	}
 
-	public long getDPC() {
-		return DPC;
+	public long getDpc() {
+		return dpc;
 	}
 
-	public long getOPC() {
-		return OPC;
+	public long getOpc() {
+		return opc;
+	}
+	
+	public int getNi() {
+		return ni;
 	}
 
-	public int getSI() {
-		return SI;
+	public int getSi() {
+		return si;
 	}
-	public String getSIdescription() {
-		switch (this.SI) {
+	
+	public String getIpSource() {
+		return ipSource;
+	}
+	
+	public String getIpDestination() {
+		return ipDestination;
+	}
+	
+	public int getPortSource() {
+		return portSource ;
+	}
+	
+	public int getPortDestination() {
+		return portDestination;
+	}
+	
+	public String getSiDescription() {
+		switch (this.si) {
 		case 3:
 			return ("SCCP");
 		case 5:
